@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+  <rect x="0" y="0" width="640" height="360" fill="#f7f8fa"/>
+  <g>
+    <rect x="0" y="220" width="640" height="140" fill="#ffeaa7"/>
+    <polygon points="100,220 150,160 200,220" fill="#d63031"/>
+    <polygon points="280,220 330,160 380,220" fill="#d63031"/>
+    <polygon points="460,220 510,160 560,220" fill="#d63031"/>
+    <rect x="0" y="210" width="640" height="10" fill="#b2bec3"/>
+    <path d="M320,210 C330,190 360,180 380,170" stroke="#6c5ce7" stroke-width="4" fill="none"/>
+    <text x="20" y="40" font-family="Fredoka, sans-serif" font-size="20" fill="#2d3436">Subduction makes volcanoes in Indonesia</text>
+    <text x="20" y="70" font-family="Fredoka, sans-serif" font-size="16" fill="#2d3436">Indo-Australian Plate goes under Eurasian Plate</text>
+  </g>
+</svg>

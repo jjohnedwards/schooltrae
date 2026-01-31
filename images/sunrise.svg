@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+  <defs>
+    <linearGradient id="dawn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffeaa7"/>
+      <stop offset="1" stop-color="#fab1a0"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="640" height="360" fill="url(#dawn)"/>
+  <g>
+    <rect x="0" y="260" width="640" height="100" fill="#55efc4"/>
+    <polygon points="200,260 320,120 440,260" fill="#636e72"/>
+    <circle cx="320" cy="190" r="40" fill="#fdcb6e" />
+    <text x="240" y="300" font-family="Fredoka, sans-serif" font-size="20" fill="#2d3436">Sunrise Hike</text>
+  </g>
+</svg>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Science Practice - KS2</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="science-theme">
+    <header>
+        <div class="logo">🇬🇧 SmartKids KS2</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="science.html" class="active">Science</a>
+        </nav>
+    </header>
+
+    <main>
+        <div id="learn-section" class="lesson-card">
+            <div class="lesson-header">
+                <h1>Science Class</h1>
+                <p>Learn the ideas, then start the questions.</p>
+            </div>
+            <div class="lesson-content">
+                <div class="fact-box">
+                    <h3>Plants</h3>
+                    <p>Plants need light, water and warmth. Roots absorb water; leaves make food.</p>
+                </div>
+                <div class="fact-box">
+                    <h3>Materials</h3>
+                    <p>Solids keep shape, liquids flow, gases spread. Some materials conduct electricity.</p>
+                </div>
+                <div class="fact-box">
+                    <h3>Forces</h3>
+                    <p>Gravity pulls us down. Friction opposes motion. Magnets attract iron.</p>
+                </div>
+                <div class="fact-box">
+                    <h3>Animals</h3>
+                    <p>Carnivores eat meat, herbivores eat plants, omnivores eat both.</p>
+                </div>
+                <div class="fact-box">
+                    <h3>Space</h3>
+                    <p>The Sun is a star. Mars is the red planet.</p>
+                </div>
+            </div>
+            <button class="start-quiz-btn" onclick="startQuiz()">I've learned it! Start Questions</button>
+            <button class="start-quiz-btn" style="background:#6c5ce7;margin-top:10px;" onclick="location.href='lesson_volcano.html'">Explore Volcano Lesson</button>
+        </div>
+
+        <div id="quiz-section" class="game-area" style="display:none;">
+            <div class="score-board">
+                <span>Score: <span id="scoreDisplay">0</span></span>
+                <span>Nature & Forces</span>
+            </div>
+
+            <div id="gameContent">
+                <div id="tipBox" class="tip-box"></div>
+                <h2 id="question" style="font-size: 2rem;">Loading...</h2>
+                <div id="options" class="options-grid">
+                    <!-- Buttons will appear here -->
+                </div>
+            </div>
+
+            <div id="feedback" class="feedback"></div>
+            
+            <p style="margin-top:30px; font-size: 0.9rem; color: #888;">
+                Aligned to UK National Curriculum (KS2)
+            </p>
+        </div>
+    </main>
+
+    <script>
+        let currentScore = parseInt(localStorage.getItem('scienceScore')) || 0;
+        let currentQuestion = {};
+
+        // Question Bank (KS2: Plants, Animals, Matter, Forces, Space)
+        const questions = [
+            { q: "What do plants need to grow?", tip: "Plants need light, water and the right temperature.", options: ["Sand & Oil", "Light & Water", "Milk & Bread", "Darkness"], a: "Light & Water" },
+            { q: "Which part of the plant absorbs water?", tip: "Roots absorb water and minerals from the soil.", options: ["Leaves", "Flowers", "Roots", "Stem"], a: "Roots" },
+            { q: "An animal that eats ONLY meat is a...", tip: "Carnivores eat meat; herbivores eat plants; omnivores eat both.", options: ["Herbivore", "Carnivore", "Omnivore", "Producer"], a: "Carnivore" },
+            { q: "Which of these is a SOLID?", tip: "Solids keep their shape; liquids flow; gases spread.", options: ["Water", "Air", "Wood", "Steam"], a: "Wood" },
+            { q: "When water freezes, it becomes...", tip: "Freezing turns liquid into solid.", options: ["Steam", "Ice", "Gas", "Liquid"], a: "Ice" },
+            { q: "Which force pulls us towards the Earth?", tip: "Gravity is the pull towards Earth.", options: ["Magnetism", "Friction", "Gravity", "Push"], a: "Gravity" },
+            { q: "The Sun is a...", tip: "The Sun is a star that gives us light and heat.", options: ["Planet", "Star", "Moon", "Asteroid"], a: "Star" },
+            { q: "Which material is magnetic?", tip: "Iron is magnetic; plastics and wood are not.", options: ["Plastic", "Iron", "Wood", "Glass"], a: "Iron" },
+            { q: "Humans have a skeleton to...", tip: "Skeletons support the body and protect organs.", options: ["Keep warm", "Digest food", "Support the body", "Hear sounds"], a: "Support the body" },
+            { q: "Electricity flows through...", tip: "Conductors let electricity flow; insulators do not.", options: ["Conductors", "Insulators", "Rubber", "Plastic"], a: "Conductors" },
+            { q: "What do seeds need to germinate?", tip: "Seeds start growing with water and warmth.", options: ["Salt", "Light & Water", "Water & Warmth", "Oil"], a: "Water & Warmth" },
+            { q: "Which is an INSULATOR?", tip: "Rubber is an insulator that stops electricity.", options: ["Copper", "Iron", "Rubber", "Steel"], a: "Rubber" },
+            { q: "A circuit will only work when it is...", tip: "Closed circuits let electricity flow.", options: ["Open", "Broken", "Closed", "Painted"], a: "Closed" },
+            { q: "Evaporation turns liquid water into...", tip: "Evaporation turns liquid into gas.", options: ["Ice", "Steam/Gas", "Salt", "Clouds only"], a: "Steam/Gas" },
+            { q: "Condensation turns water vapour into...", tip: "Condensation turns gas back into liquid water.", options: ["Liquid water", "Sand", "Metal", "Rock"], a: "Liquid water" },
+            { q: "Which change is NOT reversible?", tip: "Burning causes a new substance and cannot be reversed.", options: ["Melting ice", "Dissolving sugar", "Burning wood", "Freezing water"], a: "Burning wood" },
+            { q: "Animals that eat plants and meat are...", tip: "Omnivores eat both plants and animals.", options: ["Herbivores", "Carnivores", "Omnivores", "Detritivores"], a: "Omnivores" },
+            { q: "Shadows get longer when the light source is...", tip: "Further light sources make longer, softer shadows.", options: ["Closer", "Further", "Hidden", "Off"], a: "Further" },
+            { q: "Which habitat suits a camel?", tip: "Camels are adapted to dry, hot deserts.", options: ["Rainforest", "Desert", "Arctic", "Pond"], a: "Desert" },
+            { q: "Which material is best for a frying pan?", tip: "Metals conduct heat well.", options: ["Paper", "Plastic", "Metal", "Wool"], a: "Metal" },
+            { q: "Which part of the plant makes food?", tip: "Leaves use sunlight to make food.", options: ["Roots", "Stem", "Leaves", "Flower"], a: "Leaves" },
+            { q: "Which planet is known as the Red Planet?", tip: "Mars looks red because of iron oxide.", options: ["Earth", "Mars", "Jupiter", "Venus"], a: "Mars" },
+            { q: "Friction is a force that...", tip: "Friction slows motion between two surfaces.", options: ["Speeds up motion", "Opposes motion", "Makes heat only", "Pushes upward"], a: "Opposes motion" }
+        ];
+
+        updateScoreUI();
+
+        function startQuiz() {
+            const learn = document.getElementById('learn-section');
+            const quiz = document.getElementById('quiz-section');
+            if (learn) learn.style.display = 'none';
+            if (quiz) quiz.style.display = 'block';
+            generateQuestion();
+        }
+
+        function generateQuestion() {
+            const index = Math.floor(Math.random() * questions.length);
+            currentQuestion = questions[index];
+
+            document.getElementById('question').innerHTML = currentQuestion.q;
+            document.getElementById('tipBox').innerText = currentQuestion.tip || "Recall the science idea: materials, forces, plants, or space.";
+            
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = "";
+
+            let opts = [...currentQuestion.options];
+            opts.sort(() => Math.random() - 0.5);
+
+            opts.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected) {
+            const feedback = document.getElementById('feedback');
+
+            if (selected === currentQuestion.a) {
+                currentScore += 10;
+                feedback.innerText = "Correct! 🌟";
+                feedback.className = "feedback correct";
+                checkAwards(currentScore);
+            } else {
+                currentScore = Math.max(0, currentScore - 5);
+                feedback.innerText = `Oops! The answer was: ${currentQuestion.a}`;
+                feedback.className = "feedback wrong";
+            }
+
+            const qKey = 'scienceQuestions';
+            let qCount = parseInt(localStorage.getItem(qKey) || 0);
+            qCount += 1;
+            localStorage.setItem(qKey, qCount);
+            if (qCount % 15 === 0) {
+                alert(`🎖️ Science Milestone: ${qCount} questions completed!`);
+            }
+
+            localStorage.setItem('scienceScore', currentScore);
+            updateScoreUI();
+            reportProgress();
+            
+            const btns = document.querySelectorAll('.option-btn');
+            btns.forEach(b => b.disabled = true);
+
+            setTimeout(() => {
+                feedback.innerText = "";
+                generateQuestion();
+            }, 2000);
+        }
+
+        function updateScoreUI() {
+            document.getElementById('scoreDisplay').innerText = currentScore;
+        }
+
+        function checkAwards(score) {
+            if (score === 50) alert("🏆 New Award: Bronze Explorer!");
+            if (score === 100) alert("🏆 New Award: Silver Scientist!");
+            if (score === 200) alert("🏆 New Award: Gold Genius!");
+        }
+
+        async function reportProgress() {
+            const sid = localStorage.getItem('studentId');
+            if (!sid) return;
+            const questionsCount = parseInt(localStorage.getItem('scienceQuestions') || 0);
+            try {
+                await fetch('/api/progress', {
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({studentId: sid, subject: 'science', scoreTotal: currentScore, questionsCount})
+                });
+            } catch (e) {}
+        }
+    </script>
+</body>
+</html>

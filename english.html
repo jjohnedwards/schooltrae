@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>English Practice - KS2</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="english-theme">
+    <header>
+        <div class="logo">🇬🇧 SmartKids KS2</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="english.html" class="active">English</a>
+        </nav>
+    </header>
+
+    <main>
+        <div id="learn-section" class="lesson-card">
+            <div class="lesson-header">
+                <h1>English Class</h1>
+                <p>Learn the rules, then start the questions.</p>
+            </div>
+            <div class="lesson-content">
+                <div class="fact-box">
+                    <h3>Nouns and Verbs</h3>
+                    <p>Nouns name things. Verbs are actions or states.</p>
+                </div>
+                <div class="fact-box">
+                    <h3>Adjectives and Adverbs</h3>
+                    <p>Adjectives describe nouns. Adverbs often end in -ly and describe how.</p>
+                </div>
+                <div class="fact-box">
+                    <h3>Spelling</h3>
+                    <p>Use common patterns. Some words are irregular and must be memorised.</p>
+                </div>
+                <div class="fact-box">
+                    <h3>Homophones</h3>
+                    <p>They sound the same but mean different things: there/their/they're; to/too/two.</p>
+                </div>
+                <div class="fact-box">
+                    <h3>Punctuation</h3>
+                    <p>Questions end with ?. Use ! for strong feeling and , to separate ideas.</p>
+                </div>
+                <div class="fact-box">
+                    <h3>Conjunctions and Possession</h3>
+                    <p>Conjunctions join parts (and, because). Use apostrophe+s for singular possession.</p>
+                </div>
+            </div>
+            <button class="start-quiz-btn" onclick="startQuiz()">I've learned it! Start Questions</button>
+        </div>
+
+        <div id="quiz-section" class="game-area" style="display:none;">
+            <div class="score-board">
+                <span>Score: <span id="scoreDisplay">0</span></span>
+                <span>Grammar & Spelling</span>
+            </div>
+
+            <div id="gameContent">
+                <div id="tipBox" class="tip-box"></div>
+                <h2 id="question" style="font-size: 2rem;">Loading...</h2>
+                <div id="options" class="options-grid">
+                    <!-- Buttons will appear here -->
+                </div>
+            </div>
+
+            <div id="feedback" class="feedback"></div>
+            
+            <p style="margin-top:30px; font-size: 0.9rem; color: #888;">
+                Aligned to UK National Curriculum (KS2)
+            </p>
+        </div>
+    </main>
+
+    <script>
+        let currentScore = parseInt(localStorage.getItem('englishScore')) || 0;
+        let currentQuestion = {};
+
+        // Question Bank (KS2: Nouns, Verbs, Adjectives, Homophones, Spelling)
+        const questions = [
+            { q: "Which word is a NOUN?", tip: "A noun names a person, place or thing.", options: ["Run", "Happy", "Apple", "Quickly"], a: "Apple" },
+            { q: "Which word is a VERB?", tip: "A verb is an action or being word.", options: ["Table", "Jump", "Blue", "Slowly"], a: "Jump" },
+            { q: "Which word is an ADJECTIVE?", tip: "An adjective describes a noun.", options: ["Cat", "Sing", "Beautiful", "Tomorrow"], a: "Beautiful" },
+            { q: "Choose the correct spelling:", tip: "Sound out the word and check common spelling patterns.", options: ["Becus", "Because", "Becuase", "Beacuse"], a: "Because" },
+            { q: "Choose the correct spelling:", tip: "Double consonants are common after short vowels.", options: ["Necessary", "Neccessary", "Necesary", "Nesessary"], a: "Necessary" },
+            { q: "Complete the sentence: <br> 'The cat sat on ___ mat.'", tip: "Use 'their' for possession; 'there' for place; 'they're' = they are.", options: ["their", "there", "they're", "their's"], a: "their" },
+            { q: "Which is the plural of 'Child'?", tip: "Some plurals are irregular.", options: ["Childs", "Children", "Childrens", "Childes"], a: "Children" },
+            { q: "Find the ADVERB:", tip: "An adverb often ends in -ly and describes how.", options: ["Loudly", "Loud", "Noise", "Shout"], a: "Loudly" },
+            { q: "Which is a proper noun?", tip: "Proper nouns begin with a capital letter.", options: ["city", "london", "London", "town"], a: "London" },
+            { q: "Past tense of 'Go':", tip: "Some verbs have irregular past tense forms.", options: ["Goed", "Gone", "Went", "Going"], a: "Went" },
+            { q: "Choose the correct homophone: <br> 'We went ___ the park.'", tip: "'to' shows direction, 'too' means also, 'two' is the number.", options: ["to", "too", "two", "toe"], a: "to" },
+            { q: "Choose the correct homophone: <br> 'That is ___ book.'", tip: "Use 'their' for possession.", options: ["their", "there", "they're", "theirs'"], a: "their" },
+            { q: "Which needs a capital letter?", tip: "Days, places and names need capitals.", options: ["monday", "river thames", "london", "cat"], a: "london" },
+            { q: "Which sentence is a QUESTION?", tip: "Questions usually end with a question mark.", options: ["The dog barked.", "Is it raining?", "I like cake.", "We played football."], a: "Is it raining?" },
+            { q: "Pick the correct punctuation: <br> 'Stop ___' said Mum.", tip: "Exclamation marks show strong feeling.", options: [",", ".", "!", "?"], a: "!" },
+            { q: "Which is a conjunction?", tip: "Conjunctions join words or clauses.", options: ["and", "happy", "quickly", "table"], a: "and" },
+            { q: "Which shows possession correctly?", tip: "Use apostrophe + s for singular possession.", options: ["the dogs tail", "the dog's tail", "the dogs' tail", "the dog tail"], a: "the dog's tail" },
+            { q: "Which word is a synonym of 'big'?", tip: "A synonym means the same or similar.", options: ["tiny", "large", "small", "little"], a: "large" },
+            { q: "Which word is an antonym of 'hot'?", tip: "An antonym is an opposite.", options: ["warm", "spicy", "cold", "boiling"], a: "cold" },
+            { q: "Past tense of 'See':", tip: "Think of common irregular pairs: go/went, see/saw.", options: ["Sees", "Seeing", "Saw", "Seen"], a: "Saw" },
+            { q: "Which completes the sentence? <br> 'She ran ____ she was late.'", tip: "Conjunctions like 'because' give a reason.", options: ["because", "blue", "careful", "over"], a: "because" },
+            { q: "Which sentence uses 'they're' correctly?", tip: "'they're' = 'they are'; 'their' shows possession; 'there' is place.", options: ["They're my friends.", "Their going home.", "There happy today.", "They're car is red."], a: "They're my friends." },
+            { q: "Pick the correct spelling:", tip: "Use known spellings of months.", options: ["Febuary", "Febrary", "February", "Feburary"], a: "February" },
+            { q: "Which is a fronted adverbial?", tip: "Fronted adverbials go at the start and are followed by a comma.", options: ["Quickly", "He ran quickly.", "After lunch, we went outside.", "Lunch"], a: "After lunch, we went outside." }
+        ];
+
+        updateScoreUI();
+
+        function startQuiz() {
+            const learn = document.getElementById('learn-section');
+            const quiz = document.getElementById('quiz-section');
+            if (learn) learn.style.display = 'none';
+            if (quiz) quiz.style.display = 'block';
+            generateQuestion();
+        }
+
+        function generateQuestion() {
+            // Pick random question
+            const index = Math.floor(Math.random() * questions.length);
+            currentQuestion = questions[index];
+
+            document.getElementById('question').innerHTML = currentQuestion.q;
+            document.getElementById('tipBox').innerText = currentQuestion.tip || "Read carefully and think about the grammar rule.";
+            
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = "";
+
+            // Shuffle options logic (optional, but keeping simple for now)
+            // We just render them as is for simplicity, or could shuffle if needed.
+            // Let's simple shuffle to make it replayable.
+            let opts = [...currentQuestion.options];
+            opts.sort(() => Math.random() - 0.5);
+
+            opts.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected) {
+            const feedback = document.getElementById('feedback');
+
+            if (selected === currentQuestion.a) {
+                currentScore += 10;
+                feedback.innerText = "Correct! 🌟";
+                feedback.className = "feedback correct";
+                checkAwards(currentScore);
+            } else {
+                currentScore = Math.max(0, currentScore - 5);
+                feedback.innerText = `Oops! The answer was: ${currentQuestion.a}`;
+                feedback.className = "feedback wrong";
+            }
+
+            const qKey = 'englishQuestions';
+            let qCount = parseInt(localStorage.getItem(qKey) || 0);
+            qCount += 1;
+            localStorage.setItem(qKey, qCount);
+            if (qCount % 15 === 0) {
+                alert(`🎖️ English Milestone: ${qCount} questions completed!`);
+            }
+
+            localStorage.setItem('englishScore', currentScore);
+            updateScoreUI();
+            reportProgress();
+            
+            // Disable buttons temporarily
+            const btns = document.querySelectorAll('.option-btn');
+            btns.forEach(b => b.disabled = true);
+
+            setTimeout(() => {
+                feedback.innerText = "";
+                generateQuestion();
+            }, 2000);
+        }
+
+        function updateScoreUI() {
+            document.getElementById('scoreDisplay').innerText = currentScore;
+        }
+
+        function checkAwards(score) {
+            if (score === 50) alert("🏆 New Award: Bronze Bookworm!");
+            if (score === 100) alert("🏆 New Award: Silver Storyteller!");
+            if (score === 200) alert("🏆 New Award: Gold Grammarian!");
+        }
+
+        async function reportProgress() {
+            const sid = localStorage.getItem('studentId');
+            if (!sid) return;
+            const questionsCount = parseInt(localStorage.getItem('englishQuestions') || 0);
+            try {
+                await fetch('/api/progress', {
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({studentId: sid, subject: 'english', scoreTotal: currentScore, questionsCount})
+                });
+            } catch (e) {}
+        }
+    </script>
+</body>
+</html>

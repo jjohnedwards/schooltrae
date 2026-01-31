@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard - SmartKids</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">🇬🇧 SmartKids KS2</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="teacher.html" class="active">Teacher</a>
+        </nav>
+    </header>
+    <main>
+        <div class="lesson-card" style="max-width:900px;">
+            <div class="lesson-header">
+                <h1>Teacher Dashboard</h1>
+                <p>Monitor student progress by subject.</p>
+                <button class="start-quiz-btn" onclick="loadStudents()">Refresh</button>
+            </div>
+            <div id="content">
+                <table style="width:100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="text-align:left;">
+                            <th style="padding:10px;border-bottom:2px solid #eee;">Name</th>
+                            <th style="padding:10px;border-bottom:2px solid #eee;">Class</th>
+                            <th style="padding:10px;border-bottom:2px solid #eee;">Maths (Score/Qs)</th>
+                            <th style="padding:10px;border-bottom:2px solid #eee;">English (Score/Qs)</th>
+                            <th style="padding:10px;border-bottom:2px solid #eee;">Science (Score/Qs)</th>
+                            <th style="padding:10px;border-bottom:2px solid #eee;">Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rows"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <script>
+        async function loadStudents() {
+            try {
+                const res = await fetch('/api/students');
+                const data = await res.json();
+                const rows = document.getElementById('rows');
+                rows.innerHTML = "";
+                const students = (data && data.students) || [];
+                students.forEach(s => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td style="padding:8px;border-bottom:1px solid #f1f2f6;">${s.name}</td>
+                        <td style="padding:8px;border-bottom:1px solid #f1f2f6;">${s.classCode}</td>
+                        <td style="padding:8px;border-bottom:1px solid #f1f2f6;">${(s.scores.maths||0)} / ${(s.questions.maths||0)}</td>
+                        <td style="padding:8px;border-bottom:1px solid #f1f2f6;">${(s.scores.english||0)} / ${(s.questions.english||0)}</td>
+                        <td style="padding:8px;border-bottom:1px solid #f1f2f6;">${(s.scores.science||0)} / ${(s.questions.science||0)}</td>
+                        <td style="padding:8px;border-bottom:1px solid #f1f2f6;">${s.lastUpdated || "-"}</td>
+                    `;
+                    rows.appendChild(tr);
+                });
+            } catch (e) {
+                document.getElementById('content').innerHTML = "<p>Error loading students.</p>";
+            }
+        }
+        loadStudents();
+        setInterval(loadStudents, 5000);
+    </script>
+</body>
+</html>

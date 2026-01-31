@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a0e9ff"/>
+      <stop offset="1" stop-color="#74b9ff"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="640" height="360" fill="url(#sea)"/>
+  <g>
+    <path d="M140,180 C200,120 280,110 340,140 C380,160 420,180 460,210 C430,240 380,250 320,250 C260,250 200,230 160,220 C150,210 140,200 140,180 Z" fill="#ffeaa7" stroke="#f1c40f" stroke-width="3"/>
+    <circle cx="300" cy="190" r="6" fill="#d63031"/>
+    <text x="310" y="190" font-family="Fredoka, sans-serif" font-size="16" fill="#2d3436">Mount Batur</text>
+  </g>
+  <text x="20" y="30" font-family="Fredoka, sans-serif" font-size="20" fill="#2d3436">Bali, Indonesia</text>
+</svg>

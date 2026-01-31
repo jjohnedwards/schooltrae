@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+  <rect x="0" y="0" width="640" height="360" fill="#f7f8fa"/>
+  <g>
+    <circle cx="320" cy="180" r="140" fill="none" stroke="#b2bec3" stroke-width="6"/>
+    <ellipse cx="320" cy="190" rx="90" ry="45" fill="#74b9ff" stroke="#0984e3" stroke-width="3"/>
+    <polygon points="280,200 320,150 360,200" fill="#636e72"/>
+    <text x="250" y="90" font-family="Fredoka, sans-serif" font-size="20" fill="#2d3436">Caldera</text>
+  </g>
+</svg>

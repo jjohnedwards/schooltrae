@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Maths Practice - KS2</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">🇬🇧 SmartKids KS2</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="maths.html" class="active">Maths</a>
+        </nav>
+    </header>
+
+    <main>
+        <div id="learn-section" class="lesson-card">
+            <div class="lesson-header">
+                <h1>Maths Class</h1>
+                <p>Learn the ideas, then start the questions.</p>
+            </div>
+            <div class="lesson-content">
+                <div class="fact-box">
+                    <h3>Addition</h3>
+                    <p>Add numbers by lining up ones, tens and hundreds.</p>
+                </div>
+                <div class="fact-box">
+                    <h3>Subtraction</h3>
+                    <p>Subtract larger minus smaller. Borrow from the next place value if needed.</p>
+                </div>
+                <div class="fact-box">
+                    <h3>Times Tables</h3>
+                    <p>Use 2–12 times tables. Practice 3,4,8 then 6,7,9,11 and 12.</p>
+                </div>
+                <div class="fact-box">
+                    <h3>Fractions of amounts</h3>
+                    <p>Find a fraction of a number: divide by the denominator, then multiply by the numerator.</p>
+                </div>
+                <div class="fact-box">
+                    <h3>Perimeter</h3>
+                    <p>Perimeter of a rectangle is 2 × (length + width).</p>
+                </div>
+                <div class="fact-box">
+                    <h3>Rounding</h3>
+                    <p>Nearest 10: last digit 5–9 rounds up, 0–4 down. Nearest 100: look at tens digit.</p>
+                </div>
+            </div>
+            <button class="start-quiz-btn" onclick="startQuiz()">I've learned it! Start Questions</button>
+        </div>
+
+        <div id="quiz-section" class="game-area" style="display:none;">
+            <div class="score-board">
+                <span>Score: <span id="scoreDisplay">0</span></span>
+                <span id="levelDisplay">Year 3 Level</span>
+            </div>
+
+            <div id="gameContent">
+                <div id="tipBox" class="tip-box"></div>
+                <h2 id="question">Loading...</h2>
+                <input type="number" id="answer" placeholder="?">
+                <button class="check-btn" onclick="checkAnswer()">Check Answer</button>
+            </div>
+
+            <div id="feedback" class="feedback"></div>
+            
+            <p style="margin-top:30px; font-size: 0.9rem; color: #888;">
+                Aligned to UK National Curriculum (KS2)
+            </p>
+        </div>
+    </main>
+
+    <script>
+        let currentScore = parseInt(localStorage.getItem('mathsScore')) || 0;
+        let num1, num2, correctAnswer;
+        let questionType = ""; // 'add', 'sub', 'mult', 'frac', 'peri', 'round10', 'round100'
+
+        updateScoreUI();
+
+        function startQuiz() {
+            const learn = document.getElementById('learn-section');
+            const quiz = document.getElementById('quiz-section');
+            if (learn) learn.style.display = 'none';
+            if (quiz) quiz.style.display = 'block';
+            generateQuestion();
+        }
+
+        function generateQuestion() {
+            // Determine Level based on Score
+            let level = 1; // Year 3
+            if (currentScore >= 50) level = 2; // Year 4
+            if (currentScore >= 150) level = 3; // Year 4 Challenge
+
+            document.getElementById('levelDisplay').innerText = 
+                level === 1 ? "Year 3 Level" : 
+                level === 2 ? "Year 4 Level" : "Year 4 Challenge";
+
+            const rand = Math.random();
+
+            if (level === 1) {
+                // YEAR 3: Multiples of 3, 4, 8 and Add/Sub within 100
+                if (rand < 0.35) {
+                    // Times Tables: 3, 4, 8
+                    const tables = [3, 4, 8, 10, 5, 2];
+                    num2 = tables[Math.floor(Math.random() * tables.length)];
+                    num1 = Math.floor(Math.random() * 12) + 1;
+                    questionType = 'mult';
+                } else if (rand < 0.7) {
+                    // Add/Sub within 100
+                    num1 = Math.floor(Math.random() * 90) + 10;
+                    num2 = Math.floor(Math.random() * 90) + 1;
+                    questionType = Math.random() > 0.5 ? 'add' : 'sub';
+                } else {
+                    // Fractions of amounts (1/2, 1/4, 1/3)
+                    const fracs = [{n:1,d:2},{n:1,d:4},{n:1,d:3}];
+                    const f = fracs[Math.floor(Math.random()*fracs.length)];
+                    num1 = Math.floor(Math.random()*48)+12;
+                    correctAnswer = Math.floor(num1 * f.n / f.d);
+                    questionType = 'frac';
+                    document.getElementById('question').innerText = `${f.n}/${f.d} of ${num1} = ?`;
+                }
+            } else if (level === 2) {
+                // YEAR 4: Multiples of 6, 7, 9 and Add/Sub within 1000
+                if (rand < 0.4) {
+                    // Times Tables: 6, 7, 9, 11
+                    const tables = [6, 7, 9, 11];
+                    num2 = tables[Math.floor(Math.random() * tables.length)];
+                    num1 = Math.floor(Math.random() * 12) + 1;
+                    questionType = 'mult';
+                } else if (rand < 0.75) {
+                    // Add/Sub within 1000
+                    num1 = Math.floor(Math.random() * 800) + 100;
+                    num2 = Math.floor(Math.random() * 800) + 100;
+                    questionType = Math.random() > 0.5 ? 'add' : 'sub';
+                } else {
+                    // Perimeter of rectangle
+                    const a = Math.floor(Math.random()*19)+2;
+                    const b = Math.floor(Math.random()*19)+2;
+                    correctAnswer = 2*(a+b);
+                    questionType = 'peri';
+                    document.getElementById('question').innerText = `Perimeter of ${a}cm × ${b}cm rectangle = ? cm`;
+                }
+            } else {
+                // CHALLENGE: 12x table and bigger numbers
+                if (rand < 0.3) {
+                    num2 = 12;
+                    num1 = Math.floor(Math.random() * 12) + 1;
+                    questionType = 'mult';
+                } else if (rand < 0.7) {
+                    num1 = Math.floor(Math.random() * 2000) + 500;
+                    num2 = Math.floor(Math.random() * 2000) + 100;
+                    questionType = Math.random() > 0.5 ? 'add' : 'sub';
+                } else {
+                    // Rounding to nearest 10 or 100
+                    const mode = Math.random() > 0.5 ? 'round10' : 'round100';
+                    const x = Math.floor(Math.random()*990)+10;
+                    questionType = mode;
+                    if (mode === 'round10') {
+                        correctAnswer = Math.round(x/10)*10;
+                        document.getElementById('question').innerText = `Round ${x} to the nearest 10 = ?`;
+                    } else {
+                        correctAnswer = Math.round(x/100)*100;
+                        document.getElementById('question').innerText = `Round ${x} to the nearest 100 = ?`;
+                    }
+                }
+            }
+
+            // Construct Question
+            if (questionType === 'mult') {
+                correctAnswer = num1 * num2;
+                document.getElementById('question').innerText = `${num1} × ${num2} = ?`;
+            } else if (questionType === 'add') {
+                correctAnswer = num1 + num2;
+                document.getElementById('question').innerText = `${num1} + ${num2} = ?`;
+            } else if (questionType === 'sub') {
+                // Subtraction (ensure positive result)
+                if (num1 < num2) [num1, num2] = [num2, num1];
+                correctAnswer = num1 - num2;
+                document.getElementById('question').innerText = `${num1} − ${num2} = ?`;
+            } else if (questionType === 'frac' || questionType === 'peri' || questionType === 'round10' || questionType === 'round100') {
+                // already set correctAnswer and question text above
+            }
+
+            const tip = document.getElementById('tipBox');
+            if (questionType === 'mult') tip.innerText = "Multiply the two numbers. Use your times tables.";
+            else if (questionType === 'add') tip.innerText = "Add by lining up place values (ones, tens, hundreds).";
+            else if (questionType === 'sub') tip.innerText = "Subtract larger minus smaller. Borrow if needed.";
+            else if (questionType === 'frac') tip.innerText = "Find a fraction of a number: divide by the denominator, multiply by the numerator.";
+            else if (questionType === 'peri') tip.innerText = "Perimeter of a rectangle is 2 × (length + width).";
+            else if (questionType === 'round10') tip.innerText = "Nearest 10: last digit 5–9 rounds up, 0–4 rounds down.";
+            else if (questionType === 'round100') tip.innerText = "Nearest 100: look at the tens digit to round up or down.";
+
+            document.getElementById('answer').value = '';
+            document.getElementById('answer').focus();
+        }
+
+        function checkAnswer() {
+            const userIn = document.getElementById('answer').value;
+            if (userIn === '') return;
+            
+            const val = parseInt(userIn);
+            const feedback = document.getElementById('feedback');
+
+            if (val === correctAnswer) {
+                currentScore += 10;
+                feedback.innerText = "Brilliant! 🌟";
+                feedback.className = "feedback correct";
+                checkAwards(currentScore);
+            } else {
+                currentScore = Math.max(0, currentScore - 5);
+                feedback.innerText = `Not quite. It was ${correctAnswer}.`;
+                feedback.className = "feedback wrong";
+            }
+
+            const qKey = 'mathsQuestions';
+            let qCount = parseInt(localStorage.getItem(qKey) || 0);
+            qCount += 1;
+            localStorage.setItem(qKey, qCount);
+            if (qCount % 15 === 0) {
+                alert(`🎖️ Maths Milestone: ${qCount} questions completed!`);
+            }
+
+            localStorage.setItem('mathsScore', currentScore);
+            updateScoreUI();
+            reportProgress();
+            
+            setTimeout(() => {
+                feedback.innerText = "";
+                generateQuestion();
+            }, 2000);
+        }
+
+        function updateScoreUI() {
+            document.getElementById('scoreDisplay').innerText = currentScore;
+        }
+
+        function checkAwards(score) {
+            if (score === 50) alert("🏆 New Award: Bronze Medal (Year 3 Apprentice)");
+            if (score === 100) alert("🏆 New Award: Silver Medal (Year 4 Scholar)");
+            if (score === 200) alert("🏆 New Award: Gold Medal (Maths Master)");
+        }
+
+        document.getElementById('answer').addEventListener("keypress", function(event) {
+            if (event.key === "Enter") checkAnswer();
+        });
+
+        async function reportProgress() {
+            const sid = localStorage.getItem('studentId');
+            if (!sid) return;
+            const questionsCount = parseInt(localStorage.getItem('mathsQuestions') || 0);
+            try {
+                await fetch('/api/progress', {
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({studentId: sid, subject: 'maths', scoreTotal: currentScore, questionsCount})
+                });
+            } catch (e) {}
+        }
+    </script>
+</body>
+</html>

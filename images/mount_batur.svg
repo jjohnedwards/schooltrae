@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a29bfe"/>
+      <stop offset="1" stop-color="#74b9ff"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="640" height="360" fill="url(#sky)"/>
+  <g>
+    <rect x="0" y="260" width="640" height="100" fill="#55efc4"/>
+    <polygon points="200,260 320,120 440,260" fill="#636e72"/>
+    <polygon points="270,180 320,120 360,170" fill="#d63031"/>
+    <circle cx="355" cy="95" r="10" fill="#fdcb6e"/>
+    <text x="240" y="300" font-family="Fredoka, sans-serif" font-size="20" fill="#2d3436">Mount Batur</text>
+  </g>
+</svg>

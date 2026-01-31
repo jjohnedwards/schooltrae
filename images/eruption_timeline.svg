@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200">
+  <rect x="0" y="0" width="640" height="200" fill="#f7f8fa"/>
+  <line x1="40" y1="160" x2="600" y2="160" stroke="#b2bec3" stroke-width="3"/>
+  <rect x="80" y="120" width="20" height="40" fill="#d63031"/>
+  <rect x="200" y="90" width="20" height="70" fill="#d63031"/>
+  <rect x="320" y="130" width="20" height="30" fill="#d63031"/>
+  <rect x="440" y="80" width="20" height="80" fill="#d63031"/>
+  <rect x="520" y="110" width="20" height="50" fill="#d63031"/>
+  <text x="70" y="180" font-family="Fredoka, sans-serif" font-size="12" fill="#2d3436">1926</text>
+  <text x="190" y="180" font-family="Fredoka, sans-serif" font-size="12" fill="#2d3436">1963</text>
+  <text x="310" y="180" font-family="Fredoka, sans-serif" font-size="12" fill="#2d3436">1974</text>
+  <text x="430" y="180" font-family="Fredoka, sans-serif" font-size="12" fill="#2d3436">1994</text>
+  <text x="510" y="180" font-family="Fredoka, sans-serif" font-size="12" fill="#2d3436">2000s</text>
+  <text x="40" y="30" font-family="Fredoka, sans-serif" font-size="18" fill="#2d3436">Mount Batur Eruption Timeline (illustrative)</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+  <rect x="0" y="0" width="640" height="360" fill="#f7f8fa"/>
+  <g>
+    <ellipse cx="320" cy="190" rx="220" ry="110" fill="#dfe6e9" stroke="#b2bec3" stroke-width="3"/>
+    <ellipse cx="360" cy="200" rx="140" ry="70" fill="#74b9ff" stroke="#0984e3" stroke-width="3"/>
+    <polygon points="240,190 300,130 360,190" fill="#636e72"/>
+    <text x="340" y="205" font-family="Fredoka, sans-serif" font-size="18" fill="#2d3436">Lake Batur</text>
+  </g>
+  <text x="20" y="30" font-family="Fredoka, sans-serif" font-size="20" fill="#2d3436">Batur Caldera & Lake</text>
+</svg>

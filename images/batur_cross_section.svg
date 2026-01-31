@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+  <rect x="0" y="0" width="640" height="360" fill="#f7f8fa"/>
+  <g>
+    <rect x="0" y="220" width="640" height="140" fill="#ffeaa7"/>
+    <polygon points="180,220 320,120 460,220" fill="#636e72"/>
+    <path d="M320,120 C310,150 300,170 290,190" stroke="#d63031" stroke-width="6" fill="none"/>
+    <circle cx="290" cy="190" r="10" fill="#e17055"/>
+    <ellipse cx="320" cy="260" rx="80" ry="25" fill="#e17055"/>
+    <text x="280" y="110" font-family="Fredoka, sans-serif" font-size="16" fill="#2d3436">Crater</text>
+    <text x="240" y="205" font-family="Fredoka, sans-serif" font-size="16" fill="#2d3436">Vent</text>
+    <text x="300" y="290" font-family="Fredoka, sans-serif" font-size="16" fill="#2d3436">Magma Chamber</text>
+  </g>
+</svg>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - SmartKids</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">🇬🇧 SmartKids KS2</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="teacher.html">Teacher</a>
+            <a href="login.html" class="active">Login</a>
+        </nav>
+    </header>
+    <main>
+        <div class="lesson-card" style="max-width:500px;">
+            <div class="lesson-header">
+                <h1>Student Login</h1>
+                <p>Enter your name and class code.</p>
+            </div>
+            <div>
+                <label>Name</label>
+                <input id="name" type="text" placeholder="e.g. Ava" style="width:100%;padding:14px;margin:8px 0;border-radius:10px;border:2px solid #dfe6e9;font-size:1.1rem;">
+                <label>Class Code</label>
+                <input id="classCode" type="text" placeholder="e.g. A" style="width:100%;padding:14px;margin:8px 0;border-radius:10px;border:2px solid #dfe6e9;font-size:1.1rem;">
+                <button class="start-quiz-btn" onclick="login()">Login</button>
+                <div id="msg" class="feedback" style="margin-top:10px;"></div>
+            </div>
+        </div>
+    </main>
+    <script>
+        async function login() {
+            const name = document.getElementById('name').value.trim();
+            const classCode = document.getElementById('classCode').value.trim() || 'A';
+            const msg = document.getElementById('msg');
+            msg.textContent = "";
+            if (!name) {
+                msg.textContent = "Please enter your name.";
+                msg.className = "feedback wrong";
+                return;
+            }
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({name, classCode})
+                });
+                const data = await res.json();
+                if (data.studentId) {
+                    localStorage.setItem('studentId', data.studentId);
+                    localStorage.setItem('studentName', name);
+                    localStorage.setItem('classCode', classCode);
+                    msg.textContent = "Logged in!";
+                    msg.className = "feedback correct";
+                    setTimeout(() => location.href = 'index.html', 800);
+                } else {
+                    msg.textContent = "Login failed.";
+                    msg.className = "feedback wrong";
+                }
+            } catch (e) {
+                msg.textContent = "Network error.";
+                msg.className = "feedback wrong";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartKids UK - Key Stage 2</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">🇬🇧 SmartKids KS2</div>
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="#awards">My Awards</a>
+            <a href="login.html" id="loginLink">Login</a>
+            <a href="teacher.html">Teacher</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="hero">
+            <h1>Let's Learn!</h1>
+            <p>Key Stage 2 Practice: Years 3 & 4</p>
+            <p style="margin-top:8px;color:#636e72;">Each subject starts with a class to learn, then questions to practice.</p>
+        </div>
+
+        <!-- Featured Lesson -->
+        <div class="featured-section">
+            <a href="lesson_volcano.html" class="featured-card">
+                <div class="featured-text">
+                    <h2>🔥 New: Learn about Volcanoes!</h2>
+                    <p>Read the facts, then take the quiz to test your knowledge.</p>
+                </div>
+                <div class="featured-icon">🌋</div>
+            </a>
+        </div>
+
+        <!-- Trophy Cabinet -->
+        <div id="awards" class="awards-section">
+            <h2>🏆 Trophy Cabinet</h2>
+            <div class="trophy-shelf" id="trophyShelf">
+                <p>Complete lessons to win trophies!</p>
+            </div>
+        </div>
+
+        <div class="subject-container">
+            <!-- Maths Card -->
+            <a href="maths.html" style="text-decoration: none;">
+                <div class="card maths">
+                    <div class="icon">zzZ</div>
+                    <h2>Maths</h2>
+                    <p>Times Tables, Number Bonds & Sums</p>
+                    <button>Start Maths</button>
+                </div>
+            </a>
+
+            <!-- English Card -->
+            <a href="english.html" style="text-decoration: none;">
+                <div class="card english">
+                    <div class="icon">ABC</div>
+                    <h2>English</h2>
+                    <p>Spelling, Grammar & Reading</p>
+                    <button>Start English</button>
+                </div>
+            </a>
+
+            <!-- Science Card -->
+            <a href="science.html" style="text-decoration: none;">
+                <div class="card science">
+                    <div class="icon">⚗️</div>
+                    <h2>Science</h2>
+                    <p>Plants, Light & Forces</p>
+                    <button>Start Science</button>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        // Load Awards
+        const mScore = parseInt(localStorage.getItem('mathsScore') || 0);
+        const eScore = parseInt(localStorage.getItem('englishScore') || 0);
+        const sScore = parseInt(localStorage.getItem('scienceScore') || 0);
+        const mQ = parseInt(localStorage.getItem('mathsQuestions') || 0);
+        const eQ = parseInt(localStorage.getItem('englishQuestions') || 0);
+        const sQ = parseInt(localStorage.getItem('scienceQuestions') || 0);
+        const studentName = localStorage.getItem('studentName');
+        if (studentName) {
+            const link = document.getElementById('loginLink');
+            if (link) link.textContent = "Logged in: " + studentName;
+        }
+        
+        const shelf = document.getElementById('trophyShelf');
+        let trophies = "";
+        
+        // Maths Awards
+        if (mScore >= 50) trophies += '<div class="trophy bronze" title="Maths Bronze">🥉<br><small>Maths</small></div>';
+        if (mScore >= 100) trophies += '<div class="trophy silver" title="Maths Silver">🥈<br><small>Maths</small></div>';
+        if (mScore >= 200) trophies += '<div class="trophy gold" title="Maths Gold">🥇<br><small>Maths</small></div>';
+        const mMilestones = Math.floor(mQ/15);
+        if (mMilestones > 0) trophies += `<div class="trophy bronze" title="Maths Q Milestone">🎖️<br><small>Q${mMilestones*15}</small></div>`;
+
+        // English Awards
+        if (eScore >= 50) trophies += '<div class="trophy bronze" title="English Bronze">🥉<br><small>English</small></div>';
+        if (eScore >= 100) trophies += '<div class="trophy silver" title="English Silver">🥈<br><small>English</small></div>';
+        if (eScore >= 200) trophies += '<div class="trophy gold" title="English Gold">🥇<br><small>English</small></div>';
+        const eMilestones = Math.floor(eQ/15);
+        if (eMilestones > 0) trophies += `<div class="trophy bronze" title="English Q Milestone">🎖️<br><small>Q${eMilestones*15}</small></div>`;
+
+        // Science Awards
+        if (sScore >= 50) trophies += '<div class="trophy bronze" title="Science Bronze">🥉<br><small>Science</small></div>';
+        if (sScore >= 100) trophies += '<div class="trophy silver" title="Science Silver">🥈<br><small>Science</small></div>';
+        if (sScore >= 200) trophies += '<div class="trophy gold" title="Science Gold">🥇<br><small>Science</small></div>';
+        const sMilestones = Math.floor(sQ/15);
+        if (sMilestones > 0) trophies += `<div class="trophy bronze" title="Science Q Milestone">🎖️<br><small>Q${sMilestones*15}</small></div>`;
+        
+        if (trophies) {
+            shelf.innerHTML = trophies;
+        } else {
+            shelf.innerHTML = "<p>Play games to fill your cabinet!</p>";
+        }
+    </script>
+</body>
+</html>

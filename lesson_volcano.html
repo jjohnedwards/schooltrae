@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learn: Mount Batur (Bali) - SmartKids</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="science-theme">
+    <header>
+        <div class="logo">🇬🇧 SmartKids KS2</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="science.html">Science</a>
+            <a href="#" class="active">Volcanoes</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- LEARN SECTION -->
+        <div id="learn-section" class="lesson-card">
+            <div class="lesson-header">
+                <h1>🌋 Mount Batur, Bali</h1>
+                <p>Read about Bali’s famous volcano, then test your knowledge.</p>
+            </div>
+
+            <div class="lesson-content">
+                <div class="fact-box">
+                    <h3>1. Where is Mount Batur?</h3>
+                    <p>Mount Batur is in <b>Bali, Indonesia</b>, inside a large bowl-shaped <b>caldera</b> in the Kintamani region.</p>
+                    <img src="images/bali_map.svg" alt="Bali Map" class="lesson-img">
+                </div>
+
+                <div class="fact-box">
+                    <h3>2. Lake Batur</h3>
+                    <p><b>Lake Batur</b> sits beside the volcano inside the caldera. People fish here and watch the sunrise over the water.</p>
+                    <img src="images/lake_batur.svg" alt="Lake Batur" class="lesson-img">
+                </div>
+
+                <div class="fact-box">
+                    <h3>3. Is Mount Batur active?</h3>
+                    <p>Yes. Mount Batur is an <b>active volcano</b>. Eruptions have happened in modern times, so visitors follow safety rules.</p>
+                    <img src="images/mount_batur.svg" alt="Mount Batur" class="lesson-img">
+                </div>
+
+                <div class="fact-box">
+                    <h3>4. How high is it?</h3>
+                    <p>Mount Batur is about <b>1,717 metres</b> tall. Here’s a simple height comparison:</p>
+                    <div style="background:#fff;border-radius:12px;padding:10px;box-shadow:0 4px 8px rgba(0,0,0,0.08);">
+                        <svg viewBox="0 0 320 180" width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="0" width="320" height="180" fill="#f7f8fa"/>
+                            <text x="10" y="20" fill="#2d3436" font-size="14" font-family="Fredoka">Height (m)</text>
+                            <line x1="40" y1="150" x2="300" y2="150" stroke="#dfe6e9" stroke-width="2"/>
+                            <rect x="60" y="110" width="40" height="40" fill="#74b9ff"/>
+                            <rect x="140" y="60" width="40" height="90" fill="#55efc4"/>
+                            <rect x="220" y="30" width="40" height="120" fill="#ffeaa7"/>
+                            <text x="60" y="165" fill="#2d3436" font-size="12" font-family="Fredoka">Batur</text>
+                            <text x="140" y="165" fill="#2d3436" font-size="12" font-family="Fredoka">Agung</text>
+                            <text x="220" y="165" fill="#2d3436" font-size="12" font-family="Fredoka">Fuji</text>
+                            <text x="60" y="105" fill="#2d3436" font-size="12" font-family="Fredoka">1,717</text>
+                            <text x="140" y="55" fill="#2d3436" font-size="12" font-family="Fredoka">3,142</text>
+                            <text x="220" y="25" fill="#2d3436" font-size="12" font-family="Fredoka">3,776</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="fact-box">
+                    <h3>5. Why are there volcanoes in Indonesia?</h3>
+                    <p>Indonesia sits on the <b>Ring of Fire</b>. One tectonic plate goes <b>under</b> another. This helps make magma and volcanoes.</p>
+                    <img src="images/tectonics.svg" alt="Tectonic Plates" class="lesson-img">
+                </div>
+
+                <div class="fact-box">
+                    <h3>6. Inside a volcano</h3>
+                    <p>Volcanoes have a <b>magma chamber</b>, a <b>vent</b>, and a <b>crater</b> at the top. When pressure is high, magma becomes lava.</p>
+                    <img src="images/batur_cross_section.svg" alt="Cross Section" class="lesson-img">
+                </div>
+
+                <div class="fact-box">
+                    <h3>7. Eruptions over time</h3>
+                    <p>Mount Batur has erupted many times. Here is a simple timeline showing notable years.</p>
+                    <img src="images/eruption_timeline.svg" alt="Eruption Timeline" class="lesson-img">
+                </div>
+
+                <div class="fact-box">
+                    <h3>8. Visiting and safety</h3>
+                    <p>Many people hike at <b>sunrise</b>. Always follow guides, keep to paths, and check activity levels.</p>
+                    <img src="images/sunrise.svg" alt="Sunrise Hike" class="lesson-img">
+                </div>
+            </div>
+
+            <button class="start-quiz-btn" onclick="startQuiz()">I've learned it! Start Quiz ➡️</button>
+        </div>
+
+        <!-- QUIZ SECTION (Hidden initially) -->
+        <div id="quiz-section" class="game-area" style="display: none; max-width: 700px;">
+            <div class="score-board">
+                <span>Score: <span id="scoreDisplay">0</span></span>
+                <span>Mount Batur Quiz</span>
+            </div>
+
+            <div id="gameContent">
+                <div id="image-container" style="text-align: center; margin-bottom: 20px;">
+                    <!-- Quiz Image will appear here -->
+                </div>
+                
+                <h2 id="question" style="font-size: 1.8rem; margin-bottom: 10px;">Loading...</h2>
+                <p id="detail-text" style="color: #636e72; margin-bottom: 20px; font-style: italic;"></p>
+                
+                <div id="options" class="options-grid"></div>
+            </div>
+
+            <div id="feedback" class="feedback"></div>
+        </div>
+    </main>
+
+    <script>
+        let currentScore = 0;
+        let questionIndex = 0;
+
+        const questions = [
+            { 
+                q: "Where is Mount Batur located?", 
+                detail: "Look at the map of Bali.",
+                img: "images/bali_map.svg",
+                options: ["Bali, Indonesia", "Japan", "England", "Iceland"], 
+                a: "Bali, Indonesia" 
+            },
+            { 
+                q: "What is the lake next to Mount Batur called?", 
+                detail: "It sits inside the caldera beside the volcano.",
+                img: "images/lake_batur.svg",
+                options: ["Lake Batur", "Lake Victoria", "Lake Windermere", "Lake Garda"], 
+                a: "Lake Batur" 
+            },
+            { 
+                q: "Is Mount Batur active or extinct?", 
+                detail: "Visitors follow safety rules because it can erupt.",
+                img: "images/mount_batur.svg",
+                options: ["Active", "Extinct", "Artificial", "Frozen"], 
+                a: "Active" 
+            },
+            { 
+                q: "About how high is Mount Batur?", 
+                detail: "Compare the bars in the chart.",
+                img: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'><rect x='0' y='0' width='320' height='180' fill='%23f7f8fa'/><line x1='40' y1='150' x2='300' y2='150' stroke='%23dfe6e9' stroke-width='2'/><rect x='60' y='110' width='40' height='40' fill='%2374b9ff'/><rect x='140' y='60' width='40' height='90' fill='%2355efc4'/><rect x='220' y='30' width='40' height='120' fill='%23ffeaa7'/><text x='60' y='165' fill='%232d3436' font-size='12' font-family='Fredoka'>Batur</text><text x='140' y='165' fill='%232d3436' font-size='12' font-family='Fredoka'>Agung</text><text x='220' y='165' fill='%232d3436' font-size='12' font-family='Fredoka'>Fuji</text><text x='60' y='105' fill='%232d3436' font-size='12' font-family='Fredoka'>1,717</text><text x='140' y='55' fill='%232d3436' font-size='12' font-family='Fredoka'>3,142</text><text x='220' y='25' fill='%232d3436' font-size='12' font-family='Fredoka'>3,776</text></svg>",
+                options: ["About 1,700 m", "About 3,100 m", "About 500 m", "About 4,000 m"], 
+                a: "About 1,700 m" 
+            },
+            { 
+                q: "What surrounds Mount Batur and Lake Batur?", 
+                detail: "It was formed by ancient eruptions.",
+                img: "images/batur_caldera.svg",
+                options: ["Caldera", "Desert", "Canyon", "Forest"], 
+                a: "Caldera" 
+            },
+            { 
+                q: "When do many visitors hike Mount Batur?", 
+                detail: "They watch the sky change colours from the top.",
+                img: "images/sunrise.svg",
+                options: ["Sunrise", "Midnight", "Midday", "Sunset"], 
+                a: "Sunrise" 
+            },
+            { 
+                q: "Which plate goes under another near Indonesia?", 
+                detail: "This helps make magma.",
+                img: "images/tectonics.svg",
+                options: ["Indo-Australian under Eurasian", "Pacific over Atlantic", "African under American", "Nazca over Indian"], 
+                a: "Indo-Australian under Eurasian" 
+            },
+            { 
+                q: "What is found deep under the volcano?", 
+                detail: "It feeds eruptions.",
+                img: "images/batur_cross_section.svg",
+                options: ["Magma Chamber", "Rain Cloud", "Ice Cave", "Coal Mine"], 
+                a: "Magma Chamber" 
+            },
+            { 
+                q: "Which feature is at the top of a volcano?", 
+                detail: "Look at the diagram.",
+                img: "images/batur_cross_section.svg",
+                options: ["Crater", "Harbour", "Valley", "Cliff"], 
+                a: "Crater" 
+            },
+            { 
+                q: "What is the safe advice for hikers?", 
+                detail: "Think about guides and paths.",
+                img: "images/sunrise.svg",
+                options: ["Follow guides and paths", "Climb alone at night", "Ignore local rules", "Walk inside the crater"], 
+                a: "Follow guides and paths" 
+            },
+            { 
+                q: "Which word means the bowl-shaped area around Batur?", 
+                detail: "Formed by big eruptions.",
+                img: "images/batur_caldera.svg",
+                options: ["Caldera", "Lagoon", "Glacier", "Plateau"], 
+                a: "Caldera" 
+            },
+            { 
+                q: "Which of these is TRUE about Batur?", 
+                detail: "Use what you learned.",
+                img: "images/mount_batur.svg",
+                options: ["It is in Bali and is active", "It is in England and extinct", "It has no lake nearby", "It is taller than Mount Fuji"], 
+                a: "It is in Bali and is active" 
+            }
+        ];
+
+        function startQuiz() {
+            document.getElementById('learn-section').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'block';
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (questionIndex >= questions.length) {
+                finishQuiz();
+                return;
+            }
+
+            const q = questions[questionIndex];
+            document.getElementById('question').innerText = q.q;
+            document.getElementById('detail-text').innerText = q.detail;
+            
+            // Handle Image
+            const imgContainer = document.getElementById('image-container');
+            if (q.img) {
+                imgContainer.innerHTML = `<img src="${q.img}" class="quiz-image" alt="Question Image">`;
+            } else {
+                imgContainer.innerHTML = '';
+            }
+            
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = "";
+
+            let opts = [...q.options];
+            opts.sort(() => Math.random() - 0.5);
+
+            opts.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected) {
+            const correct = questions[questionIndex].a;
+            const feedback = document.getElementById('feedback');
+
+            if (selected === correct) {
+                currentScore += 10;
+                feedback.innerText = "Correct! 🌋";
+                feedback.className = "feedback correct";
+            } else {
+                feedback.innerText = `Wrong! It was ${correct}.`;
+                feedback.className = "feedback wrong";
+            }
+
+            const qKey = 'scienceQuestions';
+            let qCount = parseInt(localStorage.getItem(qKey) || 0);
+            qCount += 1;
+            localStorage.setItem(qKey, qCount);
+            if (qCount % 15 === 0) {
+                alert(`🎖️ Science Milestone: ${qCount} questions completed!`);
+            }
+
+            const btns = document.querySelectorAll('.option-btn');
+            btns.forEach(b => b.disabled = true);
+
+            setTimeout(() => {
+                feedback.innerText = "";
+                questionIndex++;
+                updateScore();
+                loadQuestion();
+            }, 2500);
+        }
+
+        function updateScore() {
+            document.getElementById('scoreDisplay').innerText = currentScore;
+        }
+
+        function finishQuiz() {
+            const gameContent = document.getElementById('gameContent');
+            gameContent.innerHTML = `
+                <h2>Quiz Complete!</h2>
+                <p style="font-size: 1.5rem; margin: 20px;">You scored ${currentScore} / ${questions.length * 10}</p>
+                <div style="margin-bottom: 20px;">
+                    ${currentScore === (questions.length * 10) ? '<div style="font-size:3rem;">🌋🏆</div><br><b>Ultimate Volcano Master!</b>' : 'Great effort!'}
+                </div>
+                <button class="check-btn" onclick="location.reload()">Try Again</button>
+                <button class="check-btn" style="background:#0984e3; margin-top:10px;" onclick="location.href='index.html'">Back Home</button>
+            `;
+            
+            let totalScience = parseInt(localStorage.getItem('scienceScore') || 0);
+            totalScience += currentScore;
+            localStorage.setItem('scienceScore', totalScience);
+            reportProgress(totalScience);
+            
+            if (currentScore === (questions.length * 10)) {
+                alert("🏆 PERFECT SCORE! You are a Volcano Expert!");
+            }
+        }
+
+        async function reportProgress(total) {
+            const sid = localStorage.getItem('studentId');
+            if (!sid) return;
+            const questionsCount = parseInt(localStorage.getItem('scienceQuestions') || 0);
+            try {
+                await fetch('/api/progress', {
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({studentId: sid, subject: 'science', scoreTotal: total, questionsCount})
+                });
+            } catch (e) {}
+        }
+    </script>
+</body>
+</html>
