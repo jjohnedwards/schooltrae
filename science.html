@@ -45,6 +45,7 @@
             </div>
             <button class="start-quiz-btn" onclick="startQuiz()">I've learned it! Start Questions</button>
             <button class="start-quiz-btn" style="background:#6c5ce7;margin-top:10px;" onclick="location.href='lesson_volcano.html'">Explore Volcano Lesson</button>
+            <button class="start-quiz-btn" style="background:#00b894;margin-top:10px;" onclick="location.href='lesson_rockets.html'">Explore Rockets & Moon Base</button>
         </div>
 
         <div id="quiz-section" class="game-area" style="display:none;">
@@ -70,6 +71,7 @@
     </main>
 
     <script>
+        const apiBase = location.hostname.endsWith('github.io') ? (localStorage.getItem('apiBase') || 'https://schooltrae-backend.onrender.com') : '';
         let currentScore = parseInt(localStorage.getItem('scienceScore')) || 0;
         let currentQuestion = {};
 
@@ -182,7 +184,7 @@
             if (!sid) return;
             const questionsCount = parseInt(localStorage.getItem('scienceQuestions') || 0);
             try {
-                await fetch('/api/progress', {
+                await fetch((apiBase || '') + '/api/progress', {
                     method: 'POST',
                     headers: {'Content-Type':'application/json'},
                     body: JSON.stringify({studentId: sid, subject: 'science', scoreTotal: currentScore, questionsCount})

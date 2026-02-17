@@ -115,6 +115,7 @@
     </main>
 
     <script>
+        const apiBase = location.hostname.endsWith('github.io') ? (localStorage.getItem('apiBase') || 'https://schooltrae-backend.onrender.com') : '';
         let currentScore = 0;
         let questionIndex = 0;
 
@@ -307,7 +308,7 @@
             if (!sid) return;
             const questionsCount = parseInt(localStorage.getItem('scienceQuestions') || 0);
             try {
-                await fetch('/api/progress', {
+                await fetch((apiBase || '') + '/api/progress', {
                     method: 'POST',
                     headers: {'Content-Type':'application/json'},
                     body: JSON.stringify({studentId: sid, subject: 'science', scoreTotal: total, questionsCount})

@@ -39,9 +39,10 @@
         </div>
     </main>
     <script>
+        const apiBase = location.hostname.endsWith('github.io') ? (localStorage.getItem('apiBase') || 'https://schooltrae-backend.onrender.com') : '';
         async function loadStudents() {
             try {
-                const res = await fetch('/api/students');
+                const res = await fetch((apiBase || '') + '/api/students');
                 const data = await res.json();
                 const rows = document.getElementById('rows');
                 rows.innerHTML = "";

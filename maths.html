@@ -72,6 +72,7 @@
     </main>
 
     <script>
+        const apiBase = location.hostname.endsWith('github.io') ? (localStorage.getItem('apiBase') || 'https://schooltrae-backend.onrender.com') : '';
         let currentScore = parseInt(localStorage.getItem('mathsScore')) || 0;
         let num1, num2, correctAnswer;
         let questionType = ""; // 'add', 'sub', 'mult', 'frac', 'peri', 'round10', 'round100'
@@ -250,7 +251,7 @@
             if (!sid) return;
             const questionsCount = parseInt(localStorage.getItem('mathsQuestions') || 0);
             try {
-                await fetch('/api/progress', {
+                await fetch((apiBase || '') + '/api/progress', {
                     method: 'POST',
                     headers: {'Content-Type':'application/json'},
                     body: JSON.stringify({studentId: sid, subject: 'maths', scoreTotal: currentScore, questionsCount})

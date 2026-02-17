@@ -5,6 +5,7 @@ import uuid
 
 DATA_PATH = os.path.join(os.getcwd(), "data")
 DB_FILE = os.path.join(DATA_PATH, "db.json")
+ALLOWED_ORIGIN = os.environ.get("ALLOWED_ORIGIN", "https://jjohnedwards.github.io")
 
 def ensure_db():
     os.makedirs(DATA_PATH, exist_ok=True)
@@ -22,11 +23,19 @@ def write_db(db):
         json.dump(db, f)
 
 class AppHandler(SimpleHTTPRequestHandler):
+    def _set_cors(self):
+        origin = self.headers.get("Origin")
+        allow = origin if origin and (origin == ALLOWED_ORIGIN or ALLOWED_ORIGIN == "*") else ALLOWED_ORIGIN
+        self.send_header("Access-Control-Allow-Origin", allow)
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+
     def _json_response(self, status=200, payload=None):
         body = json.dumps(payload or {}).encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
+        self._set_cors()
         self.end_headers()
         self.wfile.write(body)
 
@@ -37,6 +46,12 @@ class AppHandler(SimpleHTTPRequestHandler):
             return json.loads(raw.decode("utf-8")) if raw else {}
         except json.JSONDecodeError:
             return {}
+
+    def do_OPTIONS(self):
+        self.send_response(204)
+        self._set_cors()
+        self.send_header("Content-Length", "0")
+        self.end_headers()
 
     def do_POST(self):
         if self.path == "/api/login":
@@ -96,6 +111,7 @@ class AppHandler(SimpleHTTPRequestHandler):
         return super().do_GET()
 
 def run(server_class=HTTPServer, handler_class=AppHandler, port=8000):
+    port = int(os.environ.get("PORT", port))
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     print(f"Starting server on port {port}...")
