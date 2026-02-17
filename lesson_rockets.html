@@ -5,12 +5,34 @@
     <title>Learn: Space Rockets & Moon Bases - SmartKids</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+        <style>
+            .lab-card {background:#fff;border-radius:14px;padding:16px;box-shadow:0 6px 14px rgba(0,0,0,0.08)}
+            .lab-row {display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center}
+            .badge {display:inline-block;background:#ffeaa7;color:#2d3436;border-radius:999px;padding:4px 10px;font-weight:600;font-size:0.9rem;margin-bottom:8px}
+            .mini-note {font-size:0.9rem;color:#636e72;margin-top:6px}
+            .pulse {animation:pulse 1.8s ease-in-out infinite}
+            @keyframes pulse {0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+            .flip {perspective:1000px}
+            .flip-inner {position:relative;transform-style:preserve-3d;transition:transform .6s}
+            .flip:hover .flip-inner {transform:rotateY(180deg)}
+            .flip-face {position:relative;min-height:120px;background:#fff;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.08);padding:12px;backface-visibility:hidden}
+            .flip-back {transform:rotateY(180deg);position:absolute;top:0;left:0;right:0;bottom:0}
+            .option-btn.tiny {padding:8px 12px;font-size:0.95rem}
+            .choice-row {display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 2px}
+            .choice-btn {border:none;border-radius:10px;padding:8px 12px;background:#dfe6e9;color:#2d3436;font-weight:600;cursor:pointer}
+            .choice-btn.active {background:#74b9ff;color:#fff}
+            .status-chip {display:inline-block;border-radius:999px;padding:4px 10px;font-weight:700}
+            .status-ok {background:#55efc4;color:#2d3436}
+            .status-warn {background:#ffeaa7;color:#2d3436}
+            .status-bad {background:#fab1a0;color:#2d3436}
+        </style>
 </head>
 <body class="science-theme">
     <header>
         <div class="logo">🇬🇧 SmartKids KS2</div>
         <nav>
             <a href="index.html">Home</a>
+            <a href="learn.html">Learn</a>
             <a href="science.html">Science</a>
             <a href="#" class="active">Rockets & Moon Base</a>
         </nav>
@@ -23,7 +45,133 @@
                 <p>Learn how rockets fly to space and what humans need to live on the Moon.</p>
             </div>
 
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:10px 0 24px;">
+                <div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 4px 10px rgba(0,0,0,0.08);text-align:center;">
+                    <div style="font-weight:600;margin-bottom:6px;">Step 1: Launch</div>
+                    <svg viewBox="0 0 140 90" width="100%" height="90" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="140" height="90" fill="#f7f8fa"/>
+                        <rect x="50" y="40" width="40" height="16" rx="8" fill="#74b9ff"/>
+                        <polygon points="90,48 110,58 110,38" fill="#74b9ff"/>
+                        <polygon points="48,48 30,38 30,58" fill="#ff7675"/>
+                        <circle cx="26" cy="48" r="6" fill="#ffeaa7"/>
+                        <text x="8" y="20" fill="#2d3436" font-size="10" font-family="Fredoka">Engines fire</text>
+                    </svg>
+                </div>
+                <div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 4px 10px rgba(0,0,0,0.08);text-align:center;">
+                    <div style="font-weight:600;margin-bottom:6px;">Step 2: Earth Orbit</div>
+                    <svg viewBox="0 0 140 90" width="100%" height="90" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="140" height="90" fill="#f7f8fa"/>
+                        <circle cx="48" cy="45" r="18" fill="#74b9ff"/>
+                        <ellipse cx="48" cy="45" rx="44" ry="22" fill="none" stroke="#636e72" stroke-width="2"/>
+                        <circle cx="85" cy="40" r="3" fill="#2d3436"/>
+                        <text x="8" y="20" fill="#2d3436" font-size="10" font-family="Fredoka">Orbit speed</text>
+                    </svg>
+                </div>
+                <div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 4px 10px rgba(0,0,0,0.08);text-align:center;">
+                    <div style="font-weight:600;margin-bottom:6px;">Step 3: To the Moon</div>
+                    <svg viewBox="0 0 140 90" width="100%" height="90" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="140" height="90" fill="#f7f8fa"/>
+                        <circle cx="28" cy="45" r="14" fill="#74b9ff"/>
+                        <circle cx="110" cy="45" r="10" fill="#dfe6e9"/>
+                        <path d="M 42 45 C 70 10, 90 80, 102 45" fill="none" stroke="#6c5ce7" stroke-width="2"/>
+                        <text x="8" y="18" fill="#2d3436" font-size="10" font-family="Fredoka">Transfer path</text>
+                    </svg>
+                </div>
+                <div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 4px 10px rgba(0,0,0,0.08);text-align:center;">
+                    <div style="font-weight:600;margin-bottom:6px;">Step 4: Land</div>
+                    <svg viewBox="0 0 140 90" width="100%" height="90" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="140" height="90" fill="#f7f8fa"/>
+                        <circle cx="110" cy="48" r="10" fill="#dfe6e9"/>
+                        <rect x="58" y="40" width="20" height="16" rx="8" fill="#55efc4"/>
+                        <polygon points="78,48 88,54 88,42" fill="#55efc4"/>
+                        <line x1="68" y1="56" x2="68" y2="64" stroke="#2d3436" stroke-width="2"/>
+                        <text x="8" y="18" fill="#2d3436" font-size="10" font-family="Fredoka">Soft landing</text>
+                    </svg>
+                </div>
+            </div>
+
             <div class="lesson-content">
+                <div class="lab-card">
+                    <span class="badge">Try It: Thrust Lab</span>
+                    <div class="lab-row">
+                        <div>
+                            <svg id="thrustLab" viewBox="0 0 260 160" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0" y="0" width="260" height="160" fill="#f7f8fa"/>
+                                <!-- Rocket body -->
+                                <g transform="translate(80,40)">
+                                    <rect x="0" y="20" width="90" height="24" rx="12" fill="#74b9ff"/>
+                                    <polygon points="90,32 115,44 115,20" fill="#74b9ff"/>
+                                    <circle cx="20" cy="32" r="5" fill="#dfe6e9"/>
+                                    <circle cx="36" cy="32" r="5" fill="#dfe6e9"/>
+                                </g>
+                                <!-- Flame (dynamic width/length) -->
+                                <g transform="translate(80,40)">
+                                    <polygon id="flame" points="-8,32 -28,40 -44,32 -28,24" fill="#ff7675" class="pulse"/>
+                                    <polygon id="flameCore" points="-8,32 -22,36 -36,32 -22,28" fill="#ffeaa7"/>
+                                </g>
+                                <text x="12" y="20" fill="#2d3436" font-size="12" font-family="Fredoka">Slide to change thrust ➡</text>
+                            </svg>
+                        </div>
+                        <div>
+                            <input id="throttle" type="range" min="0" max="100" value="40" style="width:100%;">
+                            <div class="mini-note">Low thrust = small flame. High thrust = big flame! Can you lift off?</div>
+                            <div style="margin-top:10px;">
+                                <button class="option-btn tiny" id="igniteBtn">Ignite</button>
+                                <button class="option-btn tiny" id="cutoffBtn" style="background:#d63031;">Cutoff</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lab-card" style="margin-top:16px;">
+                    <span class="badge">Activity: Build a Rocket</span>
+                    <div class="lab-row">
+                        <div>
+                            <svg id="builderSvg" viewBox="0 0 260 200" width="100%" height="200" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0" y="0" width="260" height="200" fill="#f7f8fa"/>
+                                <g id="rocketGroup" transform="translate(110,40)">
+                                    <polygon id="nose" points="20,0 0,24 40,24" fill="#a29bfe"/>
+                                    <rect id="tank" x="2" y="24" width="36" height="70" rx="8" fill="#74b9ff"/>
+                                    <rect id="engine" x="10" y="94" width="20" height="16" rx="6" fill="#636e72"/>
+                                    <polygon id="nozzle" points="20,110 12,126 28,126" fill="#2d3436"/>
+                                    <polygon id="builderFlame" points="20,126 0,134 -14,126 0,118" fill="#ff7675" opacity="0"/>
+                                    <polygon id="builderFlameCore" points="20,126 6,130 -6,126 6,122" fill="#ffeaa7" opacity="0"/>
+                                </g>
+                                <text id="twrlbl" x="8" y="188" fill="#2d3436" font-size="12" font-family="Fredoka"></text>
+                            </svg>
+                        </div>
+                        <div>
+                            <div>
+                                <div class="mini-note">Nose</div>
+                                <div class="choice-row">
+                                    <button id="nosePointy" class="choice-btn">Pointy</button>
+                                    <button id="noseRounded" class="choice-btn">Rounded</button>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="mini-note">Tank</div>
+                                <div class="choice-row">
+                                    <button id="tankSmall" class="choice-btn">Small</button>
+                                    <button id="tankMedium" class="choice-btn">Medium</button>
+                                    <button id="tankLarge" class="choice-btn">Large</button>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="mini-note">Engine</div>
+                                <div class="choice-row">
+                                    <button id="engLight" class="choice-btn">Light</button>
+                                    <button id="engMedium" class="choice-btn">Medium</button>
+                                    <button id="engHeavy" class="choice-btn">Heavy</button>
+                                </div>
+                            </div>
+                            <div style="margin-top:10px;">
+                                <button id="launchBtn" class="option-btn tiny">Launch!</button>
+                                <div id="launchMsg" class="mini-note" style="margin-top:8px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="fact-box">
                     <h3>1. What is a Rocket?</h3>
                     <p>Rockets move by pushing gas out very fast. The push back makes the rocket go up. This is called thrust.</p>
@@ -67,6 +215,22 @@
                 <div class="fact-box">
                     <h3>3. How Rockets Steer</h3>
                     <p>Engines can swivel to point the thrust. Small thrusters and fins help guide the rocket safely.</p>
+                    <div style="background:#fff;border-radius:12px;padding:10px;box-shadow:0 4px 8px rgba(0,0,0,0.08);text-align:center;">
+                        <svg viewBox="0 0 340 120" width="100%" height="120" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="0" width="340" height="120" fill="#f7f8fa"/>
+                            <g>
+                                <rect x="120" y="50" width="80" height="18" fill="#a29bfe" rx="9" transform="rotate(-8 160 59)"/>
+                                <line x1="120" y1="59" x2="200" y2="59" stroke="#2d3436" stroke-dasharray="4 3"/>
+                            </g>
+                            <g>
+                                <circle cx="240" cy="60" r="5" fill="#ff7675"/>
+                                <line x1="240" y1="60" x2="260" y2="50" stroke="#ff7675" stroke-width="2"/>
+                                <line x1="240" y1="60" x2="260" y2="70" stroke="#ff7675" stroke-width="2"/>
+                            </g>
+                            <text x="18" y="22" fill="#2d3436" font-size="12" font-family="Fredoka">Engine gimbal</text>
+                            <text x="210" y="22" fill="#2d3436" font-size="12" font-family="Fredoka">Thrusters</text>
+                        </svg>
+                    </div>
                 </div>
 
                 <div class="fact-box">
@@ -87,11 +251,39 @@
                 <div class="fact-box">
                     <h3>5. What a Moon Base Needs</h3>
                     <p>Humans need air, water, food, the right pressure, and safe temperature. We also need power and strong shelters.</p>
+                    <div style="background:#fff;border-radius:12px;padding:10px;box-shadow:0 4px 8px rgba(0,0,0,0.08);text-align:center;">
+                        <svg viewBox="0 0 340 120" width="100%" height="120" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="0" width="340" height="120" fill="#f7f8fa"/>
+                            <rect x="60" y="60" width="120" height="30" rx="8" fill="#dfe6e9"/>
+                            <rect x="190" y="60" width="60" height="30" rx="8" fill="#dfe6e9"/>
+                            <rect x="180" y="68" width="20" height="14" fill="#b2bec3"/>
+                            <circle cx="80" cy="75" r="8" fill="#55efc4"/>
+                            <circle cx="105" cy="75" r="8" fill="#74b9ff"/>
+                            <circle cx="130" cy="75" r="8" fill="#ffeaa7"/>
+                            <text x="46" y="28" fill="#2d3436" font-size="12" font-family="Fredoka">Shelter, air, power</text>
+                        </svg>
+                    </div>
                 </div>
 
                 <div class="fact-box">
                     <h3>6. Staying Safe</h3>
                     <p>Radiation from space can be dangerous. Walls covered with Moon dust (regolith) help protect people inside. Suits protect outside.</p>
+                    <div style="background:#fff;border-radius:12px;padding:10px;box-shadow:0 4px 8px rgba(0,0,0,0.08);text-align:center;">
+                        <svg viewBox="0 0 340 140" width="100%" height="140" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="0" width="340" height="140" fill="#f7f8fa"/>
+                            <!-- Simple spacesuit -->
+                            <g transform="translate(150,30)">
+                                <rect x="-18" y="10" width="36" height="42" rx="8" fill="#dfe6e9"/>
+                                <circle cx="0" cy="0" r="16" fill="#b2bec3"/>
+                                <rect x="-26" y="14" width="8" height="26" rx="4" fill="#dfe6e9"/>
+                                <rect x="18" y="14" width="8" height="26" rx="4" fill="#dfe6e9"/>
+                                <rect x="-12" y="52" width="8" height="24" rx="4" fill="#dfe6e9"/>
+                                <rect x="4" y="52" width="8" height="24" rx="4" fill="#dfe6e9"/>
+                                <circle cx="0" cy="0" r="8" fill="#636e72"/>
+                            </g>
+                            <text x="96" y="120" fill="#2d3436" font-size="12" font-family="Fredoka">Suit keeps air in and radiation out</text>
+                        </svg>
+                    </div>
                 </div>
 
                 <div class="fact-box">
@@ -102,6 +294,50 @@
                 <div class="fact-box">
                     <h3>8. Life Support</h3>
                     <p>Air is cleaned and reused. Water is recycled. Plants can help make oxygen and food.</p>
+                </div>
+
+                <div class="fact-box">
+                    <h3>9. Orbits and Delta‑v</h3>
+                    <p>Getting to space needs speed as well as height. Extra speed changes orbit. This energy change is called delta‑v.</p>
+                </div>
+
+                <div class="fact-box">
+                    <h3>10. Re‑entry and Heat Shields</h3>
+                    <p>Coming home, the ship hits air and gets hot. Heat shields protect it by burning away and spreading heat.</p>
+                </div>
+
+                <div class="fact-box">
+                    <h3>11. Habitats and Modules</h3>
+                    <p>Moon bases can be modules joined by tunnels. Airlocks keep the inside safe when people go out in suits.</p>
+                </div>
+
+                <div class="fact-box">
+                    <h3>12. Comms and Navigation</h3>
+                    <p>Satellites and ground stations pass messages. Antennas on the base talk to Earth and to rovers.</p>
+                    <div style="background:#fff;border-radius:12px;padding:10px;box-shadow:0 4px 8px rgba(0,0,0,0.08);text-align:center;">
+                        <svg viewBox="0 0 340 120" width="100%" height="120" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="0" width="340" height="120" fill="#f7f8fa"/>
+                            <circle cx="70" cy="70" r="10" fill="#636e72"/>
+                            <line x1="80" y1="60" x2="120" y2="40" stroke="#6c5ce7" stroke-width="2"/>
+                            <circle cx="120" cy="40" r="6" fill="#6c5ce7"/>
+                            <line x1="80" y1="80" x2="120" y2="100" stroke="#6c5ce7" stroke-width="2"/>
+                            <circle cx="120" cy="100" r="6" fill="#6c5ce7"/>
+                            <text x="18" y="24" fill="#2d3436" font-size="12" font-family="Fredoka">Antennas and relays</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="flip">
+                    <div class="flip-inner">
+                        <div class="flip-face">
+                            <h3>Did you know?</h3>
+                            <p>The Moon’s gravity is about <b>1/6</b> of Earth’s. Astronauts can jump higher!</p>
+                        </div>
+                        <div class="flip-face flip-back">
+                            <h3>Fun fact!</h3>
+                            <p>Water ice in shadowed craters can be split into oxygen and hydrogen—air and rocket fuel!</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -137,7 +373,13 @@
             { q: "How can a base get power?", detail: "Two common ideas.", options: ["Solar panels or small nuclear", "Kites only", "Candles", "Lightning bottles"], a: "Solar panels or small nuclear" },
             { q: "What can water ice at the poles be used for?", detail: "Two uses.", options: ["Decorations only", "Drinking and making fuel", "Cooling lava", "Catching meteors"], a: "Drinking and making fuel" },
             { q: "What helps clean air and give food in a base?", detail: "Green and useful.", options: ["Sand", "Plants", "Dust", "Rocks"], a: "Plants" },
-            { q: "Which suit is needed to go outside?", detail: "Keeps you safe.", options: ["Diving suit", "Spacesuit", "Pyjamas", "Raincoat"], a: "Spacesuit" }
+            { q: "Which suit is needed to go outside?", detail: "Keeps you safe.", options: ["Diving suit", "Spacesuit", "Pyjamas", "Raincoat"], a: "Spacesuit" },
+            { q: "What is delta‑v?", detail: "Linked to changing orbits.", options: ["Rocket paint", "Change in speed/energy", "Moon dust name", "Radio code"], a: "Change in speed/energy" },
+            { q: "Why are heat shields needed?", detail: "Think about air heating.", options: ["To look shiny", "To protect during re‑entry", "To store fuel", "To hold tools"], a: "To protect during re‑entry" },
+            { q: "What does an airlock do?", detail: "Between inside and outside.", options: ["Cools water", "Keeps pressure when people exit", "Holds soil", "Makes light"], a: "Keeps pressure when people exit" },
+            { q: "How do bases talk to Earth?", detail: "Signals travel this way.", options: ["Paper letters", "Radio antennas and satellites", "Smoke", "Laser pointers only"], a: "Radio antennas and satellites" },
+            { q: "Which is a good place for solar panels on the Moon?", detail: "Think about sunlight.", options: ["Deep crater floor", "Polar high ridges", "Inside caves only", "Shaded valley"], a: "Polar high ridges" },
+            { q: "Which rover job helps a base?", detail: "Useful daily work.", options: ["Painting rocks", "Moving cargo and checking terrain", "Waving flags", "Taking naps"], a: "Moving cargo and checking terrain" }
         ];
 
         function startQuiz() {
@@ -219,6 +461,125 @@
                 });
             } catch (e) {}
         }
+
+        // Thrust Lab interactions
+        (function initThrustLab(){
+            const throttle = document.getElementById('throttle');
+            const flame = document.getElementById('flame');
+            const flameCore = document.getElementById('flameCore');
+            const igniteBtn = document.getElementById('igniteBtn');
+            const cutoffBtn = document.getElementById('cutoffBtn');
+            if (!throttle || !flame || !flameCore) return;
+            function setFlame(pct){
+                const len = 8 + (pct/100)*28; // 8..36
+                // Base points around (-8,32); extend to the left by len
+                flame.setAttribute('points', `-8,32 -${8+len},40 -${24+len},32 -${8+len},24`);
+                flameCore.setAttribute('points', `-8,32 -${6+len},36 -${18+len},32 -${6+len},28`);
+                flame.style.opacity = pct < 5 ? '0.2' : '1';
+                flameCore.style.opacity = pct < 5 ? '0.1' : '1';
+            }
+            setFlame(parseInt(throttle.value,10) || 40);
+            throttle.addEventListener('input', e => setFlame(parseInt(e.target.value,10)));
+            if (igniteBtn) igniteBtn.addEventListener('click', () => { throttle.value = 70; setFlame(70); });
+            if (cutoffBtn) cutoffBtn.addEventListener('click', () => { throttle.value = 0; setFlame(0); });
+        })();
+
+        (function initBuilder(){
+            const nose = document.getElementById('nose');
+            const tank = document.getElementById('tank');
+            const engine = document.getElementById('engine');
+            const nozzle = document.getElementById('nozzle');
+            const flame = document.getElementById('builderFlame');
+            const flameCore = document.getElementById('builderFlameCore');
+            const twrLbl = document.getElementById('twrlbl');
+            const msg = document.getElementById('launchMsg');
+            const launchBtn = document.getElementById('launchBtn');
+            const choices = {
+                nose: 'pointy',
+                tank: 'medium',
+                engine: 'medium'
+            };
+            const buttons = [
+                'nosePointy','noseRounded','tankSmall','tankMedium','tankLarge','engLight','engMedium','engHeavy'
+            ].map(id => document.getElementById(id)).filter(Boolean);
+            function setActive(idPrefix, id){
+                buttons.filter(b => b.id.startsWith(idPrefix)).forEach(b => b.classList.remove('active'));
+                const el = document.getElementById(id);
+                if (el) el.classList.add('active');
+            }
+            function rebuild(){
+                if (choices.nose === 'pointy') {
+                    nose.setAttribute('points','20,0 0,24 40,24');
+                } else {
+                    nose.setAttribute('points','8,8 0,24 40,24 32,8');
+                }
+                const tH = choices.tank === 'small' ? 50 : (choices.tank === 'large' ? 90 : 70);
+                tank.setAttribute('height', String(tH));
+                tank.setAttribute('y', String(24));
+                engine.setAttribute('y', String(24 + tH));
+                nozzle.setAttribute('points', `20,${24+tH+16} 12,${24+tH+32} 28,${24+tH+32}`);
+                flame.setAttribute('points', `20,${24+tH+32} 0,${24+tH+40} -14,${24+tH+32} 0,${24+tH+24}`);
+                flameCore.setAttribute('points', `20,${24+tH+32} 6,${24+tH+36} -6,${24+tH+32} 6,${24+tH+28}`);
+                const baseMass = 10;
+                const tankMass = choices.tank === 'small' ? 10 : (choices.tank === 'large' ? 30 : 20);
+                const engineMass = choices.engine === 'light' ? 5 : (choices.engine === 'heavy' ? 10 : 7);
+                const thrust = choices.engine === 'light' ? 15 : (choices.engine === 'heavy' ? 50 : 30);
+                const mass = baseMass + tankMass + engineMass;
+                const twr = thrust / mass;
+                twrLbl.textContent = `Mass ${mass} • Thrust ${thrust} • TWR ${twr.toFixed(2)}`;
+                flame.style.opacity = 0;
+                flameCore.style.opacity = 0;
+                msg.innerHTML = '';
+            }
+            function launch(){
+                const baseMass = 10;
+                const tankMass = choices.tank === 'small' ? 10 : (choices.tank === 'large' ? 30 : 20);
+                const engineMass = choices.engine === 'light' ? 5 : (choices.engine === 'heavy' ? 10 : 7);
+                const thrust = choices.engine === 'light' ? 15 : (choices.engine === 'heavy' ? 50 : 30);
+                const mass = baseMass + tankMass + engineMass;
+                const twr = thrust / mass;
+                if (twr >= 1.2) {
+                    flame.style.opacity = 1;
+                    flameCore.style.opacity = 1;
+                    msg.innerHTML = `<span class="status-chip status-ok">LIFTOFF!</span> Strong TWR ${twr.toFixed(2)}.`;
+                    try {
+                        const had = localStorage.getItem('badgeRockets');
+                        localStorage.setItem('badgeRockets','1');
+                        if (!had) {
+                            msg.innerHTML += " 🏅 Rockets Badge earned!";
+                        }
+                    } catch (e) {}
+                } else if (twr >= 1.0) {
+                    flame.style.opacity = 0.8;
+                    flameCore.style.opacity = 0.8;
+                    msg.innerHTML = `<span class="status-chip status-warn">Wobbly liftoff</span> TWR ${twr.toFixed(2)}. Try lighter tank or stronger engine.`;
+                } else {
+                    flame.style.opacity = 0.3;
+                    flameCore.style.opacity = 0.2;
+                    msg.innerHTML = `<span class="status-chip status-bad">No liftoff</span> TWR ${twr.toFixed(2)}. Needs more thrust.`;
+                }
+            }
+            buttons.forEach(b => b.addEventListener('click', () => {
+                if (b.id.startsWith('nose')) {
+                    choices.nose = b.id.includes('Rounded') ? 'rounded' : 'pointy';
+                    setActive('nose', b.id);
+                }
+                if (b.id.startsWith('tank')) {
+                    choices.tank = b.id.includes('Small') ? 'small' : (b.id.includes('Large') ? 'large' : 'medium');
+                    setActive('tank', b.id);
+                }
+                if (b.id.startsWith('eng')) {
+                    choices.engine = b.id.includes('Light') ? 'light' : (b.id.includes('Heavy') ? 'heavy' : 'medium');
+                    setActive('eng', b.id);
+                }
+                rebuild();
+            }));
+            if (launchBtn) launchBtn.addEventListener('click', launch);
+            setActive('nose','nosePointy');
+            setActive('tank','tankMedium');
+            setActive('eng','engMedium');
+            rebuild();
+        })();
     </script>
 </body>
 </html>

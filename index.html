@@ -12,6 +12,7 @@
         <div class="logo">🇬🇧 SmartKids KS2</div>
         <nav>
             <a href="index.html" class="active">Home</a>
+            <a href="learn.html">Learn</a>
             <a href="#awards">My Awards</a>
             <a href="login.html" id="loginLink">Login</a>
             <a href="teacher.html">Teacher</a>
@@ -33,6 +34,13 @@
                     <p>Read the facts, then take the quiz to test your knowledge.</p>
                 </div>
                 <div class="featured-icon">🌋</div>
+            </a>
+            <a href="lesson_rockets.html" class="featured-card" style="margin-top:12px;">
+                <div class="featured-text">
+                    <h2>🚀 New: Rockets & Moon Bases!</h2>
+                    <p>See launch → orbit → transfer → landing, then try the quiz.</p>
+                </div>
+                <div class="featured-icon">🚀</div>
             </a>
         </div>
 
@@ -114,6 +122,9 @@
         if (sScore >= 200) trophies += '<div class="trophy gold" title="Science Gold">🥇<br><small>Science</small></div>';
         const sMilestones = Math.floor(sQ/15);
         if (sMilestones > 0) trophies += `<div class="trophy bronze" title="Science Q Milestone">🎖️<br><small>Q${sMilestones*15}</small></div>`;
+        
+        const rocketsBadge = localStorage.getItem('badgeRockets');
+        if (rocketsBadge) trophies += '<div class="trophy gold" title="Rockets Badge">🚀<br><small>Rockets</small></div>';
         
         if (trophies) {
             shelf.innerHTML = trophies;
